@@ -589,5 +589,44 @@ window.addEventListener("load", () => {
         );
 
     }
+// =========================
+// REFAIRE MEME PARTIE
+// =========================
 
+    function refaireMemePartie() {
+
+    const anciennePartie = {
+
+        nomPartie: partie.nomPartie,
+
+        jeu: partie.jeu,
+
+        limite: partie.limite,
+
+        condition: partie.condition,
+
+        premier: partie.premier,
+
+        manche: 1,
+
+        joueurs: partie.joueurs.map(j => ({
+            nom: j.nom,
+            score: 0
+        })),
+
+        historique: []
+
+    };
+
+    partie = anciennePartie;
+
+    sauvegarder();
+
+    document.getElementById(
+        "finPartie"
+    ).style.display = "none";
+
+    afficherPartie();
+}
+    
 });
