@@ -589,21 +589,27 @@ window.addEventListener("load", () => {
         );
 
     }
-    });
+
+});
 
 // =========================
 // REFAIRE MEME PARTIE
 // =========================
 
-function refaireMemePartie() {
+window.refaireMemePartie = function () {
 
-    const anciennePartie = {
+    partie = {
 
         nomPartie: partie.nomPartie,
+
         jeu: partie.jeu,
+
         limite: partie.limite,
+
         condition: partie.condition,
+
         premier: partie.premier,
+
         manche: 1,
 
         joueurs: partie.joueurs.map(j => ({
@@ -615,8 +621,6 @@ function refaireMemePartie() {
 
     };
 
-    partie = anciennePartie;
-
     sauvegarder();
 
     document.getElementById(
@@ -624,15 +628,20 @@ function refaireMemePartie() {
     ).style.display = "none";
 
     afficherPartie();
-}
 
-function nouvellePartie() {
+};
+
+// =========================
+// NOUVELLE PARTIE
+// =========================
+
+window.nouvellePartie = function () {
 
     localStorage.removeItem(
         "compteurScores"
     );
 
     location.reload();
-}
 
+};
 // fin du fichier
