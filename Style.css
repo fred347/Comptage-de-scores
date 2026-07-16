@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compteur de Scores</title>
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>🎲 Compteur de Scores</h1>
+
+<section id="setup">
+
+<h2>Nouvelle Partie</h2>
+
+<input type="text" id="nomPartie" placeholder="Nom de la partie">
+
+<input type="text" id="nomJeu" placeholder="Nom du jeu">
+
+<input type="number" id="limite" value="500">
+
+<select id="condition">
+<option value="petit">Le plus petit gagne</option>
+<option value="grand">Le plus grand gagne</option>
+</select>
+
+<h3>Joueurs</h3>
+
+<div id="listeJoueurs"></div>
+
+<button onclick="ajouterJoueur()">
+➕ Ajouter un joueur
+</button>
+
+<h3>Premier distributeur</h3>
+
+<select id="premierDistributeur"></select>
+
+<button onclick="demarrerPartie()">
+▶ Commencer la partie
+</button>
+
+</section>
+
+<section id="game" style="display:none;">
+
+<h2 id="titrePartie"></h2>
+
+<p>
+🎴 Distributeur :
+<span id="distributeur"></span>
+</p>
+
+<p>
+👉 Prochain :
+<span id="prochain"></span>
+</p>
+
+<h3>Points de la manche</h3>
+
+<div id="zoneScores"></div>
+
+<button onclick="validerManche()">
+✅ Valider la manche
+</button>
+
+<button onclick="corrigerDerniereManche()">
+✏ Corriger dernière manche
+</button>
+
+<h3>Classement</h3>
+
+<div id="classement"></div>
+
+<h3>Historique</h3>
+
+<div id="historique"></div>
+
+</section>
+
+</div>
+
+<div id="finPartie" class="modal">
+
+<div class="modal-content">
+
+<h2>🏁 Partie terminée</h2>
+
+<div id="confettis">🎊🎉🎊🎉🎊</div>
+
+<div id="podium"></div>
+
+<div id="autres"></div>
+
+<button onclick="nouvellePartie()">
+🔄 Nouvelle partie
+</button>
+
+</div>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
