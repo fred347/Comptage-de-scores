@@ -1,4 +1,4 @@
-
+console.log("SCRIPT OK");
 const CACHE_NAME = "compteur-scores-v1";
 
 const urlsToCache = [
