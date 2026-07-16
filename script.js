@@ -628,5 +628,10 @@ alert("Bouton OK");
 
     afficherPartie();
 }
-    
+    window.refaireMemePartie = function () {
+
+    alert("Fonction chargée");
+
+};
+
 
