@@ -521,21 +521,6 @@ window.onload = () => {
 
 };
 
-historique:[]
-};
-
-sauvegarder();
-
-document.getElementById(
-"setup"
-).style.display="none";
-
-document.getElementById(
-"game"
-).style.display="block";
-
-afficherPartie();
-}
 
 function afficherPartie(){
 
