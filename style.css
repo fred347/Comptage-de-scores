@@ -1,105 +1,259 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Compteur de Scores</title>
+/* ===================== */
+/* GÉNÉRAL */
+/* ===================== */
 
-<link rel="stylesheet" href="style.css">
-</head>
-<body>
+body {
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
+}
 
-<div class="container">
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+}
 
-<h1>🎲 Compteur de Scores</h1>
+h1,
+h2,
+h3 {
+    color: #333;
+}
 
-<section id="setup">
+/* ===================== */
+/* FORMULAIRES */
+/* ===================== */
 
-<h2>Nouvelle Partie</h2>
+input,
+select,
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
 
-<input type="text" id="nomPartie" placeholder="Nom de la partie">
+button {
+    background: #1976d2;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
 
-<input type="text" id="nomJeu" placeholder="Nom du jeu">
+button:hover {
+    background: #115293;
+}
 
-<input type="number" id="limite" value="500">
+/* ===================== */
+/* JOUEURS */
+/* ===================== */
 
-<select id="condition">
-<option value="petit">Le plus petit gagne</option>
-<option value="grand">Le plus grand gagne</option>
-</select>
+.player-input {
+    display: flex;
+    gap: 10px;
+}
 
-<h3>Joueurs</h3>
+.player-input input {
+    flex: 1;
+}
 
-<div id="listeJoueurs"></div>
+.score-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
 
-<button onclick="ajouterJoueur()">
-➕ Ajouter un joueur
-</button>
+.score-row label {
+    flex: 1;
+}
 
-<h3>Premier distributeur</h3>
+.score-row input {
+    width: 120px;
+}
 
-<select id="premierDistributeur"></select>
+/* ===================== */
+/* CLASSEMENT */
+/* ===================== */
 
-<button onclick="demarrerPartie()">
-▶ Commencer la partie
-</button>
+#classement {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
 
-</section>
+/* ===================== */
+/* HISTORIQUE */
+/* ===================== */
 
-<section id="game" style="display:none;">
+#historique {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
 
-<h2 id="titrePartie"></h2>
+/* ===================== */
+/* MODAL FIN DE PARTIE */
+/* ===================== */
 
-<p>
-🎴 Distributeur :
-<span id="distributeur"></span>
-</p>
+#finPartie {
+    display: none;
+}
 
-<p>
-👉 Prochain :
-<span id="prochain"></span>
-</p>
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+}
 
-<h3>Points de la manche</h3>
+.modal-content {
+    background: white;
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: center;
+}
 
-<div id="zoneScores"></div>
+/* ===================== */
+/* PODIUM */
+/* ===================== */
 
-<button onclick="validerManche()">
-✅ Valider la manche
-</button>
+.podium {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
 
-<button onclick="corrigerDerniereManche()">
-✏ Corriger dernière manche
-</button>
+.place1,
+.place2,
+.place3 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    color: black;
+}
 
-<h3>Classement</h3>
+.place1 {
+    width: 120px;
+    height: 180px;
+    background: gold;
+}
 
-<div id="classement"></div>
+.place2 {
+    width: 120px;
+    height: 130px;
+    background: silver;
+}
 
-<h3>Historique</h3>
+.place3 {
+    width: 120px;
+    height: 100px;
+    background: #CD7F32;
+}
 
-<div id="historique"></div>
+/* ===================== */
+/* AUTRES JOUEURS */
+/* ===================== */
 
-</section>
+#autres {
+    margin-top: 25px;
+    text-align: left;
+}
 
-</div>
+/* ===================== */
+/* ANIMATION PODIUM */
+/* ===================== */
 
-<div id="finPartie" class="modal">
+@keyframes apparitionPodium {
 
-<div class="modal-content">
+    0% {
+        opacity: 0;
+        transform: translateY(150px);
+    }
 
-<h2>🏁 Partie terminée</h2>
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
 
-<div id="confettis">🎊🎉🎊🎉🎊</div>
+.podium {
+    animation: apparitionPodium 1.2s ease-out;
+}
 
-<div id="podium"></div>
+/* ===================== */
+/* CONFETTIS */
+/* ===================== */
 
-<div id="autres"></div>
+@keyframes chuteConfetti {
 
-<button onclick="nouvellePartie()">
-🔄 Nouvelle partie
-</button>
+    0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+    }
 
+    100% {
+        transform: translateY(100vh) rotate(1080deg);
+        opacity: 0;
+    }
+}
+
+.confetti {
+    position: fixed;
+    top: -50px;
+    z-index: 5000;
+    font-size: 32px;
+    animation: chuteConfetti 3s linear forwards;
+}
+
+/* ===================== */
+/* RESPONSIVE */
+/* ===================== */
+
+@media (max-width: 600px) {
+
+    .podium {
+        gap: 8px;
+    }
+
+    .place1,
+    .place2,
+    .place3 {
+        width: 90px;
+        font-size: 14px;
+    }
+
+    .place1 {
+        height: 140px;
+    }
+
+    .place2 {
+        height: 110px;
+    }
+
+    .place3 {
+        height: 90px;
+    }
+}
 </div>
 
 </div>
