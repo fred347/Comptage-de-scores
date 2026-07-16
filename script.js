@@ -594,7 +594,7 @@ window.addEventListener("load", () => {
 // =========================
 
     function refaireMemePartie() {
-
+alert("Bouton OK");
     const anciennePartie = {
 
         nomPartie: partie.nomPartie,
