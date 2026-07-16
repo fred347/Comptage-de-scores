@@ -340,19 +340,22 @@ function afficherFinPartie() {
     <div class="podium">
 
         <div class="place2">
-            🥈<br>
-            ${top3[1]?.nom || ""}
-        </div>
+    🥈<br>
+    ${top3[1]?.nom || ""}<br>
+    <strong>${top3[1]?.score || 0}</strong>
+</div>
 
-        <div class="place1">
-            🥇<br>
-            ${top3[0]?.nom || ""}
-        </div>
+<div class="place1">
+    🥇<br>
+    ${top3[0]?.nom || ""}<br>
+    <strong>${top3[0]?.score || 0}</strong>
+</div>
 
-        <div class="place3">
-            🥉<br>
-            ${top3[2]?.nom || ""}
-        </div>
+<div class="place3">
+    🥉<br>
+    ${top3[2]?.nom || ""}<br>
+    <strong>${top3[2]?.score || 0}</strong>
+</div>
 
     </div>
 
