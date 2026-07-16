@@ -1,4 +1,6 @@
 alert("Script chargé");
+console.log("SCRIPT OK");
+
 
 let partie = null;
 
