@@ -528,16 +528,19 @@ document.getElementById(
 ).innerText =
 `${partie.nomPartie} - ${partie.jeu}`;
 
-const d =
+const d = NaN
 (partie.premier +
 partie.manche -1)
 %
 partie.joueurs.length;
 
-    document.getElementById(
-    "distributeur"
-).innerText =
-    partie.joueurs[d].nom;
+   console.log("Premier :", partie.premier);
+console.log("Manche :", partie.manche);
+console.log("d =", d);
+console.log("Joueur =", partie.joueurs[d]);
+
+document.getElementById("distributeur").innerText =
+    partie.joueurs[d]?.nom || "Erreur";;
     
 const zone =
 document.getElementById(
