@@ -141,16 +141,6 @@ function demarrerPartie() {
 // AFFICHAGE
 // =========================
 
-function afficherPartie() {
-
-    document.getElementById(
-        "titrePartie"
-    ).innerText =
-        `${partie.nomPartie} - ${partie.jeu}`;
-    
-    document.getElementById(
-    "numeroManche"
-).innerText = partie.manche;
 
     const zone =
         document.getElementById("zoneScores");
