@@ -5,7 +5,557 @@ let partie = null;
 
 // =========================
 // INITIALISATION
+// =========================let partie = null;
+
 // =========================
+// INITIALISATION
+// =========================
+
+ajouterJoueur();
+ajouterJoueur();
+
+// =========================
+// JOUEURS
+// =========================
+
+function ajouterJoueur() {
+
+    const div = document.createElement("div");
+
+    div.className = "player-input";
+
+    div.innerHTML = `
+        <input type="text" placeholder="Nom du joueur">
+    `;
+
+    document
+        .getElementById("listeJoueurs")
+        .appendChild(div);
+
+    mettreAJourDistributeurs();
+}
+
+function mettreAJourDistributeurs() {
+
+    const select =
+        document.getElementById("premierDistributeur");
+
+    if (!select) return;
+
+    select.innerHTML = "";
+
+    const joueurs =
+        document.querySelectorAll("#listeJoueurs input");
+
+    joueurs.forEach((joueur, index) => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = index;
+
+        option.textContent =
+            joueur.value ||
+            `Joueur ${index + 1}`;
+
+        select.appendChild(option);
+
+    });
+
+}
+
+document.addEventListener(
+    "input",
+    mettreAJourDistributeurs
+);
+
+// =========================
+// DEMARRAGE
+// =========================
+
+function demarrerPartie() {
+
+    const joueurs = [];
+
+    document
+        .querySelectorAll("#listeJoueurs input")
+        .forEach(input => {
+
+            if (input.value.trim()) {
+
+                joueurs.push({
+                    nom: input.value.trim(),
+                    score: 0
+                });
+
+            }
+
+        });
+
+    if (joueurs.length < 2) {
+
+        alert(
+            "Il faut au minimum 2 joueurs."
+        );
+
+        return;
+    }
+
+    partie = {
+
+        nomPartie:
+            document.getElementById("nomPartie").value,
+
+        jeu:
+            document.getElementById("nomJeu").value,
+
+        limite:
+            Number(
+                document.getElementById("limite").value
+            ),
+
+        condition:
+            document.getElementById("condition").value,
+
+        premier:
+            Number(
+                document.getElementById(
+                    "premierDistributeur"
+                ).value
+            ),
+
+        manche: 1,
+
+        joueurs: joueurs,
+
+        historique: []
+
+    };
+
+    sauvegarder();
+
+    document.getElementById(
+        "setup"
+    ).style.display = "none";
+
+    document.getElementById(
+        "game"
+    ).style.display = "block";
+
+    afficherPartie();
+}
+
+// =========================
+// AFFICHAGE
+// =========================
+
+function afficherPartie() {
+
+    if (!partie) return;
+
+    document.getElementById(
+        "titrePartie"
+    ).innerText =
+        `${partie.nomPartie} - ${partie.jeu}`;
+
+    const numeroManche =
+        document.getElementById(
+            "numeroManche"
+        );
+
+    if (numeroManche) {
+
+        numeroManche.innerText =
+            partie.manche;
+
+    }
+
+    const d =
+        (
+            partie.premier +
+            partie.manche -
+            1
+        ) % partie.joueurs.length;
+
+    const donneur =
+        document.getElementById(
+            "distributeur"
+        );
+
+    if (donneur) {
+
+        donneur.innerText =
+            partie.joueurs[d].nom;
+
+    }
+
+    const zone =
+        document.getElementById(
+            "zoneScores"
+        );
+
+    zone.innerHTML = "";
+
+    partie.joueurs.forEach(joueur => {
+
+        zone.innerHTML += `
+
+        <div class="score-row">
+
+            <label>${joueur.nom}</label>
+
+            <input
+                type="number"
+                min="0"
+                value="0"
+                id="score_${joueur.nom}">
+
+        </div>
+
+        `;
+
+    });
+
+    mettreAJourClassement();
+    mettreAJourHistorique();
+}
+
+// =========================
+// VALIDER MANCHE
+// =========================
+
+function validerManche() {
+
+    const manche = [];
+
+    partie.joueurs.forEach(joueur => {
+
+        const points =
+            Number(
+                document.getElementById(
+                    `score_${joueur.nom}`
+                ).value
+            );
+
+        joueur.score += points;
+
+        manche.push({
+
+            joueur: joueur.nom,
+
+            points: points
+
+        });
+
+    });
+
+    partie.historique.push(
+        manche
+    );
+
+    partie.manche++;
+
+    sauvegarder();
+
+    if (verifierFinPartie()) {
+
+        afficherFinPartie();
+
+        return;
+
+    }
+
+    afficherPartie();
+}
+
+// =========================
+// FIN PARTIE
+// =========================
+
+function verifierFinPartie() {
+
+    return partie.joueurs.some(
+        joueur =>
+            joueur.score >= partie.limite
+    );
+}
+
+function afficherFinPartie() {
+
+    document.getElementById(
+        "finPartie"
+    ).style.display = "block";
+
+    let classement =
+        [...partie.joueurs];
+
+    classement.sort((a, b) => {
+
+        if (
+            partie.condition === "petit"
+        ) {
+
+            return a.score - b.score;
+
+        }
+
+        return b.score - a.score;
+
+    });
+
+    const top3 =
+        classement.slice(0, 3);
+
+    document.getElementById(
+        "podium"
+    ).innerHTML = `
+
+    <div class="podium">
+
+        <div class="place2">
+            🥈<br>
+            ${top3[1]?.nom || ""}
+        </div>
+
+        <div class="place1">
+            🥇<br>
+            ${top3[0]?.nom || ""}
+        </div>
+
+        <div class="place3">
+            🥉<br>
+            ${top3[2]?.nom || ""}
+        </div>
+
+    </div>
+
+    `;
+
+    document.getElementById(
+        "autres"
+    ).innerHTML =
+
+        classement
+            .slice(3)
+            .map((j, i) =>
+
+                `${i + 4}. ${j.nom} (${j.score})`
+
+            )
+            .join("<br>");
+
+    lancerConfettis();
+}
+
+// =========================
+// CONFETTIS
+// =========================
+
+function lancerConfettis() {
+
+    for (let i = 0; i < 40; i++) {
+
+        const c =
+            document.createElement(
+                "div"
+            );
+
+        c.className =
+            "confetti";
+
+        c.innerHTML =
+            ["🎊", "🎉", "✨", "🎈"]
+            [
+                Math.floor(
+                    Math.random() * 4
+                )
+            ];
+
+        c.style.left =
+            Math.random() *
+            window.innerWidth +
+            "px";
+
+        document.body.appendChild(c);
+
+        setTimeout(() => {
+
+            c.remove();
+
+        }, 4000);
+
+    }
+
+}
+
+// =========================
+// CLASSEMENT
+// =========================
+
+function mettreAJourClassement() {
+
+    let classement =
+        [...partie.joueurs];
+
+    classement.sort((a, b) => {
+
+        if (
+            partie.condition === "petit"
+        ) {
+
+            return a.score - b.score;
+
+        }
+
+        return b.score - a.score;
+
+    });
+
+    document.getElementById(
+        "classement"
+    ).innerHTML =
+
+        classement
+            .map((j, i) =>
+
+                `${i + 1}. ${j.nom} : ${j.score}`
+
+            )
+            .join("<br>");
+}
+
+// =========================
+// HISTORIQUE
+// =========================
+
+function mettreAJourHistorique() {
+
+    document.getElementById(
+        "historique"
+    ).innerHTML =
+
+        partie.historique
+            .map((m, i) => {
+
+                let html =
+                    `<h4>Manche ${i + 1}</h4>`;
+
+                m.forEach(l => {
+
+                    html +=
+                        `${l.joueur} : ${l.points}<br>`;
+
+                });
+
+                html += "<hr>";
+
+                return html;
+
+            })
+
+            .join("");
+
+}
+
+// =========================
+// CORRECTION
+// =========================
+
+function corrigerDerniereManche() {
+
+    if (
+        partie.historique.length === 0
+    ) return;
+
+    const derniere =
+        partie.historique.pop();
+
+    derniere.forEach(l => {
+
+        const joueur =
+            partie.joueurs.find(
+                j =>
+                    j.nom === l.joueur
+            );
+
+        joueur.score -= l.points;
+
+    });
+
+    partie.manche--;
+
+    sauvegarder();
+
+    afficherPartie();
+}
+
+// =========================
+// ANNULATION PARTIE
+// =========================
+
+function annulerPartie() {
+
+    if (
+        !confirm(
+            "Voulez-vous vraiment annuler cette partie ?"
+        )
+    ) {
+        return;
+    }
+
+    localStorage.removeItem(
+        "compteurScores"
+    );
+
+    location.reload();
+}
+
+// =========================
+// SAUVEGARDE
+// =========================
+
+function sauvegarder() {
+
+    localStorage.setItem(
+        "compteurScores",
+        JSON.stringify(partie)
+    );
+
+}
+
+// =========================
+// CHARGEMENT
+// =========================
+
+window.onload = () => {
+
+    const sauvegarde =
+        localStorage.getItem(
+            "compteurScores"
+        );
+
+    if (!sauvegarde) {
+
+        return;
+
+    }
+
+    partie =
+        JSON.parse(
+            sauvegarde
+        );
+
+    document.getElementById(
+        "setup"
+    ).style.display = "none";
+
+    document.getElementById(
+        "game"
+    ).style.display = "block";
+
+    afficherPartie();
+
+};
 
 ajouterJoueur();
 ajouterJoueur();
