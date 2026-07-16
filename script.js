@@ -149,17 +149,6 @@ function afficherPartie() {
     ).innerText =
         `${partie.nomPartie} - ${partie.jeu}`;
 
-    const distributeurIndex =
-        (partie.premier + partie.manche - 1) %
-        partie.joueurs.length;
-
-    c
-
-    document.getElementById(
-        "prochain"
-    ).innerText =
-        partie.joueurs[prochainIndex].nom;
-
     const zone =
         document.getElementById("zoneScores");
 
