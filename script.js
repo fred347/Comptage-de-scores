@@ -534,6 +534,11 @@ partie.manche -1)
 %
 partie.joueurs.length;
 
+    document.getElementById(
+    "distributeur"
+).innerText =
+    partie.joueurs[d].nom;
+    
 const zone =
 document.getElementById(
 "zoneScores"
