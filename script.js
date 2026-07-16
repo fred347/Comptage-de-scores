@@ -153,14 +153,7 @@ function afficherPartie() {
         (partie.premier + partie.manche - 1) %
         partie.joueurs.length;
 
-    const prochainIndex =
-        (distributeurIndex + 1) %
-        partie.joueurs.length;
-
-    document.getElementById(
-        "distributeur"
-    ).innerText =
-        partie.joueurs[distributeurIndex].nom;
+    c
 
     document.getElementById(
         "prochain"
