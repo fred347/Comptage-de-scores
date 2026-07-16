@@ -549,3 +549,45 @@ function sauvegarder() {
     );
 
 }
+
+// =========================
+// CHARGEMENT
+// =========================
+
+window.addEventListener("load", () => {
+
+    const sauvegarde =
+        localStorage.getItem(
+            "compteurScores"
+        );
+
+    if (!sauvegarde) {
+        return;
+    }
+
+    try {
+
+        partie =
+            JSON.parse(sauvegarde);
+
+        document.getElementById(
+            "setup"
+        ).style.display = "none";
+
+        document.getElementById(
+            "game"
+        ).style.display = "block";
+
+        afficherPartie();
+
+    } catch (e) {
+
+        console.error(e);
+
+        localStorage.removeItem(
+            "compteurScores"
+        );
+
+    }
+
+});
