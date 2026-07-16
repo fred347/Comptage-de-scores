@@ -1,3 +1,5 @@
+alert("Script chargé");
+
 let partie = null;
 
 // =========================
