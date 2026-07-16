@@ -748,26 +748,3 @@ localStorage.removeItem(
 location.reload();
 }
 
-window.onload = ()=>{
-
-const save =
-localStorage.getItem(
-"compteurScores"
-);
-
-if(save){
-
-partie = JSON.parse(save);
-
-document.getElementById(
-"setup"
-).style.display="none";
-
-document.getElementById(
-"game"
-).style.display="block";
-
-afficherPartie();
-}
-};
-
