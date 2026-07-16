@@ -589,24 +589,21 @@ window.addEventListener("load", () => {
         );
 
     }
+    });
+
 // =========================
 // REFAIRE MEME PARTIE
 // =========================
 
-    function refaireMemePartie() {
-alert("Bouton OK");
+function refaireMemePartie() {
+
     const anciennePartie = {
 
         nomPartie: partie.nomPartie,
-
         jeu: partie.jeu,
-
         limite: partie.limite,
-
         condition: partie.condition,
-
         premier: partie.premier,
-
         manche: 1,
 
         joueurs: partie.joueurs.map(j => ({
@@ -628,5 +625,14 @@ alert("Bouton OK");
 
     afficherPartie();
 }
-});
+
+function nouvellePartie() {
+
+    localStorage.removeItem(
+        "compteurScores"
+    );
+
+    location.reload();
+}
+
 // fin du fichier
