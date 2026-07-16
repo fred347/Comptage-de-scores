@@ -521,7 +521,6 @@ window.onload = () => {
 
 };
 
-
 function afficherPartie(){
 
 document.getElementById(
