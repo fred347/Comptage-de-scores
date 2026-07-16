@@ -629,4 +629,4 @@ alert("Bouton OK");
     afficherPartie();
 }
     
-});
+
