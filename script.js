@@ -55,7 +55,6 @@ function mettreAJourDistributeurs() {
     });
 
 }
-
 document.addEventListener(
     "input",
     mettreAJourDistributeurs
