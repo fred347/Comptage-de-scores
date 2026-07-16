@@ -534,21 +534,6 @@ partie.manche -1)
 %
 partie.joueurs.length;
 
-const p =
-(d+1)
-%
-partie.joueurs.length;
-
-document.getElementById(
-"distributeur"
-).innerText =
-partie.joueurs[d].nom;
-
-document.getElementById(
-"prochain"
-).innerText =
-partie.joueurs[p].nom;
-
 const zone =
 document.getElementById(
 "zoneScores"
