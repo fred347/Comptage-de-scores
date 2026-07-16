@@ -628,6 +628,5 @@ alert("Bouton OK");
 
     afficherPartie();
 }
-    
-
-
+}
+// fin du fichier
