@@ -562,8 +562,8 @@ value="0">
 
 });
 
-majClassement();
-majHistorique();
+mettreAJourClassement();
+mettreAJourHistorique();
 }
 
 function validerManche(){
