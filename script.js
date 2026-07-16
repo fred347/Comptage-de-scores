@@ -224,37 +224,19 @@ function validerManche() {
 // =========================
 
 function annulerPartie() {
-2
- 
-3
-if (
-4
-!confirm(
-5
-"Voulez-vous vraiment annuler cette partie ?"
-6
-)
-7
-) {
-8
-return;
-9
+
+    if (!confirm(
+        "Voulez-vous vraiment annuler cette partie ?"
+    )) {
+        return;
+    }
+
+    localStorage.removeItem(
+        "compteurScores"
+    );
+
+    location.reload();
 }
-10
- 
-11
-localStorage.removeItem(
-12
-"compteurScores"
-13
-);
-14
- 
-15
-location.reload();
-16
-}
-17
 
 // =========================
 // FIN DE PARTIE
