@@ -80,6 +80,23 @@ button:hover {
 .score-row input {
     width: 120px;
 }
+// =========================
+// ANNULER PARTIE
+// =========================
+
+.btn-danger {
+2
+background: #d32f2f;
+3
+}
+4
+ 
+5
+.btn-danger:hover {
+6
+background: #b71c1c;
+7
+}
 
 /* ===================== */
 /* CLASSEMENT */
