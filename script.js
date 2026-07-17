@@ -286,11 +286,57 @@ function validerManche() {
     ) {
 
         afficherFinPartie();
-
+        annoncerClassement();
         return;
     }
 
     afficherPartie();
+    annoncerClassement();
+
+}
+// =========================
+// annonce score
+// =========================
+
+function annoncerClassement() {
+
+    let classement = [...partie.joueurs];
+
+    classement.sort((a, b) => {
+
+        if (partie.condition === "petit") {
+            return a.score - b.score;
+        }
+
+        return b.score - a.score;
+
+    });
+
+    const positions = [
+        "Premier",
+        "Deuxième",
+        "Troisième",
+        "Quatrième",
+        "Cinquième",
+        "Sixième",
+        "Septième",
+        "Huitième"
+    ];
+
+    const texte = classement
+        .map((j, i) =>
+            `${positions[i]} ${j.nom} avec ${j.score} points`
+        )
+        .join(". ");
+
+    const voix =
+        new SpeechSynthesisUtterance(texte);
+
+    voix.lang = "fr-FR";
+
+    speechSynthesis.cancel();
+    speechSynthesis.speak(voix);
+}
 }
 
 // =========================
