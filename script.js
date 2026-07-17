@@ -312,27 +312,21 @@ function annoncerClassement() {
 
     });
 
-    const positions = [
-        "Premier",
-        "Deuxième",
-        "Troisième",
-        "Quatrième",
-        "Cinquième",
-        "Sixième",
-        "Septième",
-        "Huitième"
-    ];
-
-    const texte = classement
-        .map((j, i) =>
-            `${positions[i]} ${j.nom} avec ${j.score} points`
-        )
-        .join(". ");
+    
+    const texte =
+        classement
+        .map(j => j.nom)
+        .join(", ");
 
     const voix =
         new SpeechSynthesisUtterance(texte);
 
     voix.lang = "fr-FR";
+    voix.rate = 1;
+    voix.pitch = 1;
+ 
+speechSynthesis.cancel();
+speechSynthesis.speak(voix);
 
     speechSynthesis.cancel();
     speechSynthesis.speak(voix);
