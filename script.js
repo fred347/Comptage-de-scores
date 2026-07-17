@@ -281,8 +281,6 @@ function validerManche() {
 
     sauvegarder();
 
-    annoncerClassement();
-
     if (
         verifierFinPartie()
     ) {
@@ -293,34 +291,6 @@ function validerManche() {
     }
 
     afficherPartie();
-}
-
-function annoncerClassement() {
-
-    let classement = [...partie.joueurs];
-
-    classement.sort((a, b) => {
-
-        if (partie.condition === "petit") {
-            return a.score - b.score;
-        }
-
-        return b.score - a.score;
-
-    });
-
-    const texte =
-        "Classement actuel. " +
-        classement.map(j => j.nom).join(", ");
-
-    const voix =
-        new SpeechSynthesisUtterance(texte);
-
-    voix.lang = "fr-FR";
-    voix.rate = 1;
-
-    speechSynthesis.cancel();
-    speechSynthesis.speak(voix);
 }
 
 // =========================
@@ -677,37 +647,4 @@ window.nouvellePartie = function () {
     location.reload();
 
 };
-
-// =========================
-// NOUVELLE PARTIE
-// =========================
-
-function annoncerClassement() {
-
-    let classement = [...partie.joueurs];
-
-    classement.sort((a, b) => {
-
-        if (partie.condition === "petit") {
-            return a.score - b.score;
-        }
-
-        return b.score - a.score;
-
-    });
-
-    const texte =
-        "Classement actuel. " +
-        classement.map(j => j.nom).join(", ");
-
-    const voix =
-        new SpeechSynthesisUtterance(texte);
-
-    voix.lang = "fr-FR";
-    voix.rate = 1;
-
-    speechSynthesis.cancel();
-    speechSynthesis.speak(voix);
-}
-
 // fin du fichier
