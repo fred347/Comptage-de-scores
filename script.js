@@ -337,7 +337,6 @@ function annoncerClassement() {
     speechSynthesis.cancel();
     speechSynthesis.speak(voix);
 }
-}
 
 // =========================
 // FIN DE PARTIE
