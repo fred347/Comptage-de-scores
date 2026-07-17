@@ -315,14 +315,14 @@ function annoncerClassement() {
     
     const texte =
         classement
-        .map(j => j.nom)
+        .map(j => `${j.nom} avec ${j.score} points`)
         .join(", ");
 
     const voix =
         new SpeechSynthesisUtterance(texte);
 
     voix.lang = "fr-FR";
-    voix.rate = 1;
+    voix.rate = 2;
     voix.pitch = 1;
  
 speechSynthesis.cancel();
