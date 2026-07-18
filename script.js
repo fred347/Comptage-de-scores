@@ -322,7 +322,7 @@ function annoncerClassement() {
         new SpeechSynthesisUtterance(texte);
 
     voix.lang = "fr-FR";
-    voix.rate = 2;
+    voix.rate = 1;
     voix.pitch = 1;
  
 speechSynthesis.cancel();
