@@ -143,6 +143,9 @@ background: #b71c1c;
     padding: 25px;
     border-radius: 15px;
     text-align: center;
+
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 /* ===================== */
