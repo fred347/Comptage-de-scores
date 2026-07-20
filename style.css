@@ -194,6 +194,9 @@ background: #b71c1c;
     text-align: left;
 }
 
+/* ===================== */
+/* HISTORIQUE DE FIN */
+/* ===================== */
 #historiqueFin {
     max-height: 400px;
     overflow-y: auto;
