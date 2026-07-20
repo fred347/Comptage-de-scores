@@ -650,7 +650,12 @@ window.refaireMemePartie = function () {
 
         condition: partie.condition,
 
-        premier: partie.premier,
+        premier:
+        (
+            partie.premier +
+            partie.manche
+        ) %
+        partie.joueurs.length,
 
         manche: 1,
 
