@@ -189,6 +189,11 @@ function afficherPartie() {
     ).innerText =
         `${partie.nomPartie} - ${partie.jeu}`;
 
+    document.getElementById(
+    "titreManche"
+).innerText =
+    `🎯 Manche ${partie.manche}`;
+
     const donneurIndex =
         (
             partie.premier +
