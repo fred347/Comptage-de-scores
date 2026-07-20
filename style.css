@@ -80,22 +80,17 @@ button:hover {
 .score-row input {
     width: 120px;
 }
-// =========================
-// ANNULER PARTIE
-// =========================
+/* ===================== */
+/* ANNULER PARTIE */
+/* ===================== */
 
 .btn-danger {
-2
+
 background: #d32f2f;
-3
 }
-4
  
-5
 .btn-danger:hover {
-6
 background: #b71c1c;
-7
 }
 
 /* ===================== */
@@ -199,6 +194,21 @@ background: #b71c1c;
     text-align: left;
 }
 
+#historiqueFin {
+    max-height: 400px;
+    overflow-y: auto;
+
+    margin-top: 15px;
+    padding: 10px;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    background: #f8f9fa;
+
+    text-align: left;
+}
+
 /* ===================== */
 /* ANIMATION PODIUM */
 /* ===================== */
@@ -274,11 +284,4 @@ background: #b71c1c;
         height: 90px;
     }
 }
-</div>
 
-</div>
-
-<script src="script.js"></script>
-
-</body>
-</html>
