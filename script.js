@@ -716,4 +716,45 @@ window.nouvellePartie = function () {
     location.reload();
 
 };
+
+// =========================
+// CORRIGER DERNIERE MANCHE
+// =========================
+
+window.corrigerDerniereMancheFin = function () {
+
+    if (partie.historique.length === 0) {
+        return;
+    }
+
+    const derniere =
+        partie.historique.pop();
+
+    derniere.forEach(ligne => {
+
+        const joueur =
+            partie.joueurs.find(
+                j => j.nom === ligne.joueur
+            );
+
+        if (joueur) {
+            joueur.score -= ligne.points;
+        }
+
+    });
+
+    partie.manche--;
+
+    sauvegarder();
+
+    document.getElementById(
+        "finPartie"
+    ).style.display = "none";
+
+    document.getElementById(
+        "game"
+    ).style.display = "block";
+
+    afficherPartie();
+};
 // fin du fichier
