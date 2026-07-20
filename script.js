@@ -412,6 +412,31 @@ function afficherFinPartie() {
             )
             .join("<br>");
 
+    document.getElementById(
+    "historiqueFin"
+).innerHTML =
+
+    partie.historique
+        .map((manche, index) => {
+
+            let html =
+                `<strong>Manche ${index + 1}</strong><br>`;
+
+            manche.forEach(ligne => {
+
+                html +=
+                    `${ligne.joueur} : ${ligne.points}<br>`;
+
+            });
+
+            html += "<hr>";
+
+            return html;
+
+        })
+
+        .join("");
+
     lancerConfettis();
 }
 
