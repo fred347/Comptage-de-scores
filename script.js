@@ -693,7 +693,7 @@ window.refaireMemePartie = function () {
         premier:
         (
             partie.premier +
-            partie.manche
+            partie.manche -1
         ) %
         partie.joueurs.length,
 
