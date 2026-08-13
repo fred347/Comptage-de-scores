@@ -39,9 +39,16 @@ function testVoix() {
 
     voix.lang = "fr-FR";
 
-    speechSynthesis.speak(voix);
+const liste = speechSynthesis.getVoices();
+
+const voixFr =
+    liste.find(v => v.lang.startsWith("fr"));
+
+if (voixFr) {
+    voix.voice = voixFr;
 }
 
+    
 // =========================
 // JOUEURS
 // =========================
