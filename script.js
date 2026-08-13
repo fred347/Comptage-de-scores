@@ -33,19 +33,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function testVoix() {
 
-    const voix = new SpeechSynthesisUtterance(
-        "Test de la synthèse vocale"
-    );
+    speechSynthesis.cancel();
 
-    voix.lang = "fr-FR";
+    const texte =
+        new SpeechSynthesisUtterance(
+            "Test de la synthèse vocale"
+        );
 
-const liste = speechSynthesis.getVoices();
+    texte.lang = "fr-FR";
 
-const voixFr =
-    liste.find(v => v.lang.startsWith("fr"));
+    speechSynthesis.speak(texte);
 
-if (voixFr) {
-    voix.voice = voixFr;
 }
 
     
