@@ -300,7 +300,7 @@ function validerManche() {
 
 }
 // =========================
-// annonce score
+// annonce score + donneur
 // =========================
 
 function annoncerClassement() {
@@ -317,21 +317,31 @@ function annoncerClassement() {
 
     });
 
-    
+    const donneurIndex =
+        (
+            partie.premier +
+            partie.manche - 1
+        ) %
+        partie.joueurs.length;
+
+    const prochainDonneur =
+        partie.joueurs[donneurIndex].nom;
+
     const texte =
         classement
-        .map(j => `${j.nom} avec ${j.score} points`)
-        .join(", ");
+            .map(j =>
+                `${j.nom} avec ${j.score} points`
+            )
+            .join(". ")
+        +
+        `. Le donneur est ${prochainDonneur}`;
 
     const voix =
         new SpeechSynthesisUtterance(texte);
 
     voix.lang = "fr-FR";
-    voix.rate = 1.5;
+    voix.rate = 1;
     voix.pitch = 1;
- 
-speechSynthesis.cancel();
-speechSynthesis.speak(voix);
 
     speechSynthesis.cancel();
     speechSynthesis.speak(voix);
