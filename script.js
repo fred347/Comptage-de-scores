@@ -28,6 +28,21 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // =========================
+// TEST VOIX
+// =========================
+
+function testVoix() {
+
+    const voix = new SpeechSynthesisUtterance(
+        "Test de la synthèse vocale"
+    );
+
+    voix.lang = "fr-FR";
+
+    speechSynthesis.speak(voix);
+}
+
+// =========================
 // JOUEURS
 // =========================
 
